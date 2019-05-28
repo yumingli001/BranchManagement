@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    active: dev
+server:
+  port: 8081
+
+---
+# 测试环境配置
+spring:
+  profiles: dev
+
+dubbo:
+  application:
+    name: yunlsp-saas-portal-consumer-test
+  registry:
+    address: nacos://192.168.2.75:8848
+
+nacos:
+  config:
+    # namespace: f1dbf3c7-940b-4da5-8f75-d4ae89802d74
+    server-addr: 192.168.2.75:8848
+    enabled: true
+
+---
+# 正式环境配置
+spring:
+  profiles: online
+
+# dubbo配置信息
+dubbo:
+  application:
+    name: yunlsp-saas-portal-consumer
+  registry:
+    address: nacos://192.168.2.75:8848
+
+# nacos配置信息
+nacos:
+  config:
+    # namespace: dbf7a8f1-c0a0-4b3f-b5e1-e714a1419a31
+    server-addr: 192.168.2.75:8848
+    enabled: true

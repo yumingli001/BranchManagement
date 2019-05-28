@@ -1,0 +1,36 @@
+# maven ignore
+target/
+
+!.mvn/wrapper/*
+*.war
+*.zip
+*.tar
+*.tar.gz
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+.class
+logs/*
+out/
+# idea ignore
+.idea/
+.metadata/
+*.ipr
+*.iml
+*.iws
+*/dependency-reduced-pom.xml
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system ignore
+.DS_Store
+Thumbs.db
+node_modules
+package-lock.json

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunlsp.saas.service.dao.SaasCompanyMapper">
+    <resultMap id="BaseResultMap" type="com.yunlsp.saas.service.bean.SaasCompany">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="company_id" jdbcType="VARCHAR" property="companyId"/>
+        <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+        <result column="company_type" jdbcType="VARCHAR" property="companyType"/>
+        <result column="company_address" jdbcType="VARCHAR" property="companyAddress"/>
+        <result column="business_no" jdbcType="VARCHAR" property="businessNo"/>
+        <result column="fax" jdbcType="VARCHAR" property="fax"/>
+        <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
+        <result column="company_email" jdbcType="VARCHAR" property="companyEmail"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="audit_result" jdbcType="INTEGER" property="auditResult"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="contacts_info" jdbcType="VARCHAR" property="contactsInfo"/>
+        <result column="company_simple_name" jdbcType="VARCHAR" property="companySimpleName"/>
+        <result column="nature" jdbcType="VARCHAR" property="nature"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, company_id, company_name, company_type, company_address, business_no, fax, telephone, 
+    company_email, create_time, modify_time, remark, audit_result, create_by, contacts_info, 
+    company_simple_name, nature
+  </sql>
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from company
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByCompanyId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from company
+        where company_id = #{companyId}
+    </select>
+
+    <insert id="insert" parameterType="com.yunlsp.saas.service.bean.SaasCompany">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into company (company_id, company_name, company_type,
+        company_address, business_no, fax,
+        telephone, company_email, create_time,
+        modify_time, remark, audit_result,
+        create_by, contacts_info, company_simple_name,
+        nature)
+        values (#{companyId,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{companyType,jdbcType=VARCHAR},
+        #{companyAddress,jdbcType=VARCHAR}, #{businessNo,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR},
+        #{telephone,jdbcType=VARCHAR}, #{companyEmail,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{modifyTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{auditResult,jdbcType=INTEGER},
+        #{createBy,jdbcType=VARCHAR}, #{contactsInfo,jdbcType=VARCHAR}, #{companySimpleName,jdbcType=VARCHAR},
+        #{nature,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="update" parameterType="com.yunlsp.saas.service.bean.SaasCompany">
+    update company
+    set company_id = #{companyId,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_type = #{companyType,jdbcType=VARCHAR},
+      company_address = #{companyAddress,jdbcType=VARCHAR},
+      business_no = #{businessNo,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      company_email = #{companyEmail,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      audit_result = #{auditResult,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      contacts_info = #{contactsInfo,jdbcType=VARCHAR},
+      company_simple_name = #{companySimpleName,jdbcType=VARCHAR},
+      nature = #{nature,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
